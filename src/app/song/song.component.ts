@@ -2,7 +2,6 @@ import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Song} from '../models/song';
 import {SongService} from '../services/song.service';
 import {Category} from '../models/category';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-song',
@@ -14,29 +13,21 @@ export class SongComponent implements OnInit {
   constructor(public songService: SongService,
   ) {
   }
-
   song: Song = new Song();
   songList: Song[] = [];
-  categoryList: Category[];
+  categoryList: Category[] = [];
   category: Category = new Category();
-  selectedCategory: number;
+  selectedCategoryType: Category;
 
   title: any;
   artist: any;
   key = 'title';
   reverse = false;
 
-  categoryListData: Category[] = [
-    {id: 1, name: 'folk'},
-    {id: 2, name: 'pop'},
-    {id: 3, name: 'sevdah'},
-
-  ];
-
-  ngOnInit(): void {
-    this.getSongs();
-    this.getCategories();
-  }
+    ngOnInit(): void {
+      this.getSongs();
+      this.getCategories();
+    }
 
   getSongs(): void {
     this.songService.getSongList()
@@ -62,8 +53,13 @@ export class SongComponent implements OnInit {
       error => console.log(error));
   }
 
-  getCategories(): Category[] {
-  return this.categoryListData;
+  getCategories(): void {
+    this.songService.getCategories().subscribe(
+      res => {
+        this.categoryList = res;
+      },
+      error => console.log(error)
+    );
   }
 
 
@@ -85,13 +81,20 @@ export class SongComponent implements OnInit {
   }
 
   Search(): void {
-    if (this.title === '') {
+    if ( this.title === '') {
       this.ngOnInit();
     } else {
       this.songList = this.songList.filter(res => {
-        return res.title.toLocaleLowerCase().match(this.title.toLocaleLowerCase());
-      });
-    }
+      return res.title.toLocaleLowerCase().match(this.title.toLocaleLowerCase());
+    });
+  }
+  }
+
+  selectedCategory(type: Category): void {
+      this.selectedCategoryType = type;
+      console.log('kliknuto');
+
+
   }
 
 }
