@@ -13,23 +13,41 @@ export class SongComponent implements OnInit {
   constructor(public songService: SongService,
   ) {
   }
+
   song: Song = new Song();
   songList: Song[] = [];
   categoryList: Category[] = [];
   category: Category = new Category();
-  selectedCategoryType: Category;
-
+  selectedCategory: Category;  // selektovana kategorija
+  showModal: boolean;
   title: any;
   artist: any;
   key = 'title';
   reverse = false;
 
-    ngOnInit(): void {
-      this.getSongs();
-      this.getCategories();
-    }
+  ngOnInit(): void {
 
-  getSongs(): void {
+    // ako je selektovana kategorija vrati pjesme za tu kategoriju
+    // ako nije selektovana kategorija(prvi ulazak na stranicu), vrati sve pjesme
+
+    if (this.selectedCategory) {
+      this.getSongsBySelectedCategory(this.selectedCategory.id);
+    } else {
+      this.getAllSongs();
+    }
+    this.getCategories();
+  }
+
+  getSongsBySelectedCategory(categoryId: number | any): void {
+    this.songService.getSongsByCategory(categoryId)
+      .subscribe(res => {
+          this.songList = res;
+        },
+        error1 => console.log(error1)
+      );
+  }
+
+  getAllSongs(): void {
     this.songService.getSongList()
       .subscribe(res => {
           this.songList = res;
@@ -38,8 +56,8 @@ export class SongComponent implements OnInit {
       );
   }
 
+
   saveSong(): any {
-    //  this.song.category = this.category;
     this.songService.saveSong(this.song).subscribe(
       createdSong => {
         this.songList.push(createdSong);
@@ -63,17 +81,18 @@ export class SongComponent implements OnInit {
   }
 
 
-  /*deleteBook(id: number): void {
-    if (confirm('Are you sure to delete this book ?')) {
-      this.bookService.deleteBook(id)
+  deleteSong(id: number): void {
+    this.showModal = true;
+    {
+      this.songService.deleteSong(id)
         .subscribe(res => {
-            this.bookList = this.bookList.filter(item => item.id !== id);
+            this.songList = this.songList.filter(song => song.id !== id);
             console.log('obrisana knjiga');
           },
           err => console.log(err));
     }
   }
-*/
+
 
   onSearchClear(): void {
     this.title = ' ';
@@ -81,20 +100,25 @@ export class SongComponent implements OnInit {
   }
 
   Search(): void {
-    if ( this.title === '') {
+    if (this.title === '') {
       this.ngOnInit();
     } else {
       this.songList = this.songList.filter(res => {
-      return res.title.toLocaleLowerCase().match(this.title.toLocaleLowerCase());
-    });
+        return res.title.toLocaleLowerCase().match(this.title.toLocaleLowerCase());
+      });
+    }
   }
+
+  selectCategory(category: Category): void {
+    this.selectedCategory = category;
+    console.log('kliknuto');
+    this.getSongsBySelectedCategory(category.id);
   }
 
-  selectedCategory(type: Category): void {
-      this.selectedCategoryType = type;
-      console.log('kliknuto');
 
-
+  clearSelected(): void {
+    this.ngOnInit();
+    this.getAllSongs();
   }
 
 }

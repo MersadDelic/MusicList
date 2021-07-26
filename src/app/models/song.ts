@@ -1,5 +1,5 @@
 export class Song {
-  id?: number;
+  id?: number | any;
   title: string;
   artist: string;
   url?: string;
@@ -7,9 +7,5 @@ export class Song {
   isFavourite?: boolean;
   createdTime?: string;
   modifiedTime?: string;
-  categoryId?: any;
-
-  constructor()  {
-    this.categoryId  = {    };
-  }
+  categoryId?: number;
 }

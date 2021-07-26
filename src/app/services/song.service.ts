@@ -12,7 +12,7 @@ import {Category} from '../models/category';
 export class SongService {
 
   private songUrl = 'https://localhost:5001/api/songs';
-  private categoryUrl = 'https://localhost:5001/api/Category';
+  private categoryUrl = 'https://localhost:5001/api/categories';
 
   constructor(public http: HttpClient) { }
 
@@ -23,6 +23,15 @@ export class SongService {
         catchError((err) => throwError(err))
       );
   }
+
+  getSongsByCategory(categoryId: number | any): Observable<Song[]> {
+    return this.http.get<Song[]>(this.songUrl + `/category/${categoryId}`)
+      .pipe(
+        tap(data => console.log(data)),
+        catchError((err) => throwError(err))
+      );
+  }
+
   saveSong(song: Song): Observable<Song> {
     return this.http.post<Song>(this.songUrl, song)
       .pipe(

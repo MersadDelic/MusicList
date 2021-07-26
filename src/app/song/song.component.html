@@ -1,210 +1,161 @@
-<!--
-
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show':showModal}" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button za modal -->
   <div class="merso">
     <button (click)="getCategories()"
-            type="button" class="btn btn-danger" style="margin-top: 20px; "
+            type="button" class="btn btn-danger" style="padding-top: 10px; margin: 12px "
             data-toggle="modal"
             data-target="#addSong">ADD NEW SONG
     </button>
   </div>
 
-<div class="container" style="padding-top: 60px !Important">
-
-  <div class="row">
-    <div class="col-md-offset-1 col-md-20">
-      <div class="panel">
-        <div class="panel-heading">
-          <div class="row">
 
 
-                    &lt;!&ndash; S E A R C H&ndash;&gt;
-            <div >
-              <div class="btn_group">
-                <input type="text" class="form-control" placeholder="Search"/>
-              </div>
+<!-- MODAL ZA DODAVANJE PJESME -->
 
-            </div>
-          </div>
-        </div>
-        <div class="panel-body table-responsive">
-          <table class="table" id="myTable">
-            <thead>
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Artist</th>
-              <th>Rating</th>
-              <th>Category</th>
-              <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let song of songList">
-              <td>-</td>
-              <td>{{song.title}}</td>
-              <td>{{song.artist}}</td>
-              <td>{{song.rating}}</td>
-              <td>
-                &lt;!&ndash;  <button class="btn btn-danger" (click)="deleteSong(song.id)">Delete</button>
-                  <li><a href="#" data-tip="edit"><i class="fa fa-edit"></i></a></li>
-                  <li><a href="#" data-tip="delete"><i class="fa fa-trash"></i></a></li>&ndash;&gt;
-              </td>
-            </tr>
-
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-  &lt;!&ndash; ADD SONG&ndash;&gt;
-
-<div class="modal fade" id="addSong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-
-      &lt;!&ndash;HEADER&ndash;&gt;
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New Song</h5>
-        <button class="close" id="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-
-      &lt;!&ndash;BODY&ndash;&gt;
-      <div class="modal-body">
-        <form>
-
-          <div class="form-group">
-            <label for="title">Song title</label>
-            <input type="text" class="form-control" id="title" required [(ngModel)]="song.title"
-                   name="title">
-          </div>
-
-          <div class="form-group">
-            <label for="artist">Song artist</label>
-            <input type="text" class="form-control" id="artist" required [(ngModel)]="song.artist"
-                   name="artist">
-          </div>
-
-
-           &lt;!&ndash;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; A D D   C A T E G O R Y into this BOOK MODAL-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;
-
-          <button type="button" class="btn btn-primary" style="margin-top: 20px;"
-                  data-toggle="modal"
-                  data-target="#addCategory">Add new category
-          </button>
-
-          <div class="form-group">
-            <label for="category">Or select from the list below</label>
-            <select [(ngModel)]="song.categoryId" class="form-control" name="category" id="category">
-              <option *ngFor="let category of categoryList" [ngValue]="category.id">{{category.name}}</option>
-            </select>
-          </div>
-         &lt;!&ndash; &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;
-        </form>
-        &lt;!&ndash;FOOTER&ndash;&gt;
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" id="btn" data-dismiss="modal"
-                  (click)="saveSong()">Save
-          </button>
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-  &lt;!&ndash; ADD CATEGORY&ndash;&gt;
-
-  <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+  <div class="modal fade" id="addSong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
        aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
 
-        &lt;!&ndash;HEADER&ndash;&gt;
+
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel2">Add Category</h5>
-          <button class="close" id="close2" type="button" data-dismiss="modal" aria-label="Close">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Song</h5>
+          <button class="close" id="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
 
-        &lt;!&ndash;BODY&ndash;&gt;
+
         <div class="modal-body">
-          <form id="prevent">
+          <form>
 
             <div class="form-group">
-              <label for="title1">Title</label>
-              <input type="text" class="form-control" id="title1" required [(ngModel)]="category.name" name="title1">
+              <label for="title">Song title</label>
+              <input type="text" class="form-control" id="title" required [(ngModel)]="song.title"
+                     name="title">
+            </div>
+
+            <div class="form-group">
+              <label for="artist">Song artist</label>
+              <input type="text" class="form-control" id="artist" required [(ngModel)]="song.artist"
+                     name="artist">
             </div>
 
 
-            &lt;!&ndash;FOOTER&ndash;&gt;
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="prevent1" data-dismiss="modal"
-                      (click)="saveCategory()">OK
-              </button>
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+
+            <!-- BUTTON ZA DODAVANJE KATEGORIJE UNUTAR SONG MODALA -->
+            <button type="button" class="btn btn-primary" style="margin-top: 20px;"
+                    data-toggle="modal"
+                    data-target="#addCategory">Add new category
+            </button>
+
+            <div class="form-group">
+              <label for="category">Or select from the list below</label>
+              <select [(ngModel)]="song.categoryId" class="form-control" name="category" id="category">
+                <option *ngFor="let category of categoryList" [ngValue]="category.id">{{category.name}}</option>
+              </select>
             </div>
           </form>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" id="btn" data-dismiss="modal"
+                    (click)="saveSong()">Save
+            </button>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- MODAL ZA DODAVANJE kategorije -->
+    <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+         aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2">Add Category</h5>
+            <button class="close" id="close2" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+
+          <div class="modal-body">
+            <form id="prevent">
+
+              <div class="form-group">
+                <label for="title1">Title</label>
+                <input type="text" class="form-control" id="title1" required [(ngModel)]="category.name" name="title1">
+              </div>
+
+
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="prevent1" data-dismiss="modal"
+                        (click)="saveCategory()">OK
+                </button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
 
-  </div>
--->
+<div class='col-xs-12' style="padding-bottom: 20px; margin: auto; text-align: center">
+  <button class="btn btn-outline-primary" style="margin: 0 5px 0 0 "
+          *ngFor="let cat of categoryList;"
+          [ngClass]="{'active': cat === selectedCategory}"
+          (click)="selectCategory(cat)">
+    <h6>{{cat.name}}</h6>
+  </button>
+  <button type="button" class="btn btn-warning" (click)="clearSelected()">Clear</button>
+</div>
 
-
+<!-- LISTA PJESAMA -->
 <div class="container">
-  <div id="mylist" class="card p-3">
+  <div  class="card p-3" >
       <div class="row">
-        <div class="col-10">
-          <input class="form-control" type="text" [(ngModel)]="title" name="title" placeholder="Search here ..." autocomplete="off" (ngModelChange)="Search()">
+        <div class="col-10" style="margin:10px auto">
+          <input class="form-control" type="text" [(ngModel)]="title" name="title" placeholder="Search by song title ..." autocomplete="off" (ngModelChange)="Search()">
         </div>
 
-        <div class="col-lg-2"
-            style="display: inline-grid; border: 1px solid #000000; border-radius: 5px; cursor: pointer; text-align: center; margin: 3px;  "
-            *ngFor="let cat of categoryList;"
-             (click)="selectedCategory(category)">
-           <h3>{{cat.name}}</h3>
-      </div>
-    <!--
-      <table class="table table-striped table-bordered mt-3">
-        <thead>
-        <tr *ngFor="let song of songList">
-          <th scope="col">{{song.title}}</th>
-          <th scope="col">{{song.artist}}</th>
-          <th scope="col">{{song.rating}}</th>
-
-        </tr>
-        </thead>
-      </table>
-     <tbody class="list">
-        <tr id="myitem">
-          <th class="name" scope="row"></th>
-          <td colspan="city"></td>
-          <td class="ext"></td>
-        </tr>
-        </tbody>
-      </table>
-      <div class="d-flex justify-content-center mt-2">
-        <ul class="pagination"></ul>
-      </div>-->
 
 
     <div class="card-group">
-      <div id="myItem" class="col-md-3"  *ngFor="let song of songList">
-        <div class="card mt-3">
-          <img src="./assets/song.jpg" class="card-img-top" width="300" height="150">
+      <div style="padding: 5px" *ngFor="let song of songList">
+        <div class="card mt-lg-auto">
+          <img src="./assets/song.jpg" class="card-img-top" width="300" height="110" alt="slika">
           <div class="card-body">
-            <h5 class="name">{{song.title}}</h5>
-            <small class="city-text-muted">{{song.artist}}</small>
+            <p>Song title:  <strong> {{song.title}}</strong> </p>
+            <p>Artist: <strong>{{song.artist}}</strong></p>
+          </div>
+          <div class="btn btn_group" >
+            <i class="fas fa-trash" style="font-size: 25px; padding: 15px; color: #ef3e3e" (click)="deleteSong(song.id)"></i>
+            <i class="fas fa-edit" style="font-size: 25px; padding: 15px; color: #185ed4" (click)="clearSelected()"></i>
           </div>
 
           </div>
@@ -215,4 +166,4 @@
         </div>
       </div>
 
-
+</div>
