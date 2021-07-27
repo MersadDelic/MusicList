@@ -14,6 +14,7 @@ export class SongService {
   private songUrl = 'https://localhost:5001/api/songs';
   private categoryUrl = 'https://localhost:5001/api/categories';
 
+
   constructor(public http: HttpClient) { }
 
   getSongList(): Observable<Song[]> {
@@ -25,7 +26,7 @@ export class SongService {
   }
 
   getSongsByCategory(categoryId: number | any): Observable<Song[]> {
-    return this.http.get<Song[]>(this.songUrl + `/category/${categoryId}`)
+    return this.http.get<Song[]>(this.categoryUrl + `/${categoryId}/songs`)
       .pipe(
         tap(data => console.log(data)),
         catchError((err) => throwError(err))

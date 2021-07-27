@@ -19,11 +19,8 @@ export class SongComponent implements OnInit {
   categoryList: Category[] = [];
   category: Category = new Category();
   selectedCategory: Category;  // selektovana kategorija
-  showModal: boolean;
   title: any;
   artist: any;
-  key = 'title';
-  reverse = false;
 
   ngOnInit(): void {
 
@@ -82,12 +79,11 @@ export class SongComponent implements OnInit {
 
 
   deleteSong(id: number): void {
-    this.showModal = true;
     {
       this.songService.deleteSong(id)
         .subscribe(res => {
             this.songList = this.songList.filter(song => song.id !== id);
-            console.log('obrisana knjiga');
+            console.log('obrisana pjesma');
           },
           err => console.log(err));
     }
@@ -111,13 +107,11 @@ export class SongComponent implements OnInit {
 
   selectCategory(category: Category): void {
     this.selectedCategory = category;
-    console.log('kliknuto');
     this.getSongsBySelectedCategory(category.id);
   }
 
 
   clearSelected(): void {
-    this.ngOnInit();
     this.getAllSongs();
   }
 
