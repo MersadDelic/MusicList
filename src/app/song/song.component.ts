@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Song} from '../models/song';
 import {SongService} from '../services/song.service';
 import {Category} from '../models/category';
@@ -112,6 +112,7 @@ export class SongComponent implements OnInit {
 
 
   clearSelected(): void {
+    this.ngOnInit();
     this.getAllSongs();
   }
 
