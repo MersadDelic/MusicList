@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Song} from '../models/song';
 import {SongService} from '../services/song.service';
 import {Category} from '../models/category';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-song',
@@ -10,8 +12,13 @@ import {Category} from '../models/category';
 })
 export class SongComponent implements OnInit {
 
-  constructor(public songService: SongService,
-  ) {
+  constructor(public songService: SongService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
+
+    this.formGroup = new FormGroup({
+      title: new FormControl(null),
+      artist: new FormControl(null),
+      categoryId: new FormControl(null)
+    });
   }
 
   song: Song = new Song();
@@ -21,6 +28,7 @@ export class SongComponent implements OnInit {
   selectedCategory: Category;  // selektovana kategorija
   title: any;
   artist: any;
+  formGroup: FormGroup;
 
   ngOnInit(): void {
 
@@ -53,13 +61,36 @@ export class SongComponent implements OnInit {
       );
   }
 
-
-  saveSong(): any {
+  saveSong(): void {
+    this.song.title = this.formGroup.value.title;
+    this.song.artist = this.formGroup.value.artist;
+    this.song.categoryId = this.formGroup.value.categoryId;
     this.songService.saveSong(this.song).subscribe(
-      createdSong => {
-        this.songList.push(createdSong);
+      res => {
+        this.songList.push(this.song);
+        console.log('USPJESNO');
       },
-      err => console.log(err));
+      error => console.log('neuspjeh')
+    );
+  }
+
+  onEdit(song: Song): any {
+    this.formGroup.controls.title.setValue(song.title);
+    this.formGroup.controls.artist.setValue(song.artist);
+    this.formGroup.controls.categoryId.setValue(song.categoryId);
+  }
+
+  updateSong(): void {
+    this.song.title = this.formGroup.value.title;
+    this.song.artist = this.formGroup.value.artist;
+    this.song.categoryId = this.formGroup.value.categoryId;
+
+    this.songService.updateSong(this.song.id, this.song).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => console.log(error)
+    );
   }
 
   saveCategory(): void {

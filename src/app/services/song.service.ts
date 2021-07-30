@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {Song} from '../models/song';
@@ -15,7 +15,8 @@ export class SongService {
   private categoryUrl = 'https://localhost:5001/api/categories';
 
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+  }
 
   getSongList(): Observable<Song[]> {
     return this.http.get<Song[]>(this.songUrl)
@@ -48,7 +49,6 @@ export class SongService {
         catchError((err) => throwError(err))
       );
   }
-
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.categoryUrl)
       .pipe(
@@ -62,8 +62,19 @@ export class SongService {
         tap(data => console.log(data)),
         catchError((err) => throwError(err))
       );
-}
+  }
 
+  updateSong(id: number, song: Song): Observable<Song> {
+    return this.http.put<Song>(this.songUrl + `/${id}`, song)
+      .pipe(
+        tap(data => console.log(data)),
+        catchError((err) => throwError(err))
+      );
+  }
+
+  getSongById(id: number): Observable<Song> {
+    return this.http.get<Song>(this.songUrl + `/${id}`);
+  }
 
 }
 
