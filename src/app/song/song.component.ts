@@ -71,7 +71,7 @@ export class SongComponent implements OnInit {
     this.songService.saveSong(this.song).subscribe(
       res => {
         this.songList.push(res);
-        this.formGroup.reset(FormControl);
+        this.resetSongForm();
       },
       error => console.log('neuspjeh')
     );
@@ -102,6 +102,7 @@ export class SongComponent implements OnInit {
     this.songService.saveCategory(this.category).subscribe(
       createdCategory => {
         this.categoryList.push(createdCategory);
+        this.resetCategoryForm();
       },
       error => console.log(error));
   }
@@ -154,5 +155,12 @@ export class SongComponent implements OnInit {
     this.getAllSongs();
   }
 
+  resetCategoryForm(): void {
+    this.category.name = '';
+  }
+
+  resetSongForm(): void {
+    this.formGroup.reset(FormControl);
+  }
 }
 
