@@ -64,7 +64,7 @@ export class SongService {
       );
   }
 
-  updateSong(id: number, song: Song): Observable<Song> {
+  updateSong(id: number | any, song: Song): Observable<Song> {
     return this.http.put<Song>(this.songUrl + `/${id}`, song)
       .pipe(
         tap(data => console.log(data)),

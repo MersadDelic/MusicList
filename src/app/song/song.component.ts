@@ -29,6 +29,9 @@ export class SongComponent implements OnInit {
   title: any;
   artist: any;
   formGroup: FormGroup;
+  id: number | any;
+  formaGroup: FormGroup;
+
 
   ngOnInit(): void {
 
@@ -67,14 +70,16 @@ export class SongComponent implements OnInit {
     this.song.categoryId = this.formGroup.value.categoryId;
     this.songService.saveSong(this.song).subscribe(
       res => {
-        this.songList.push(this.song);
-        console.log('USPJESNO');
+        this.songList.push(res);
+        this.formGroup.reset(FormControl);
       },
       error => console.log('neuspjeh')
     );
   }
 
   onEdit(song: Song): any {
+    console.log(song);
+    this.songService.getSongById(song.id).subscribe(res => this.song = res);
     this.formGroup.controls.title.setValue(song.title);
     this.formGroup.controls.artist.setValue(song.artist);
     this.formGroup.controls.categoryId.setValue(song.categoryId);
@@ -84,10 +89,10 @@ export class SongComponent implements OnInit {
     this.song.title = this.formGroup.value.title;
     this.song.artist = this.formGroup.value.artist;
     this.song.categoryId = this.formGroup.value.categoryId;
-
     this.songService.updateSong(this.song.id, this.song).subscribe(
       res => {
         console.log(res);
+        window.location.reload();
       },
       error => console.log(error)
     );
@@ -95,7 +100,9 @@ export class SongComponent implements OnInit {
 
   saveCategory(): void {
     this.songService.saveCategory(this.category).subscribe(
-      createdCategory => this.categoryList.push(createdCategory),
+      createdCategory => {
+        this.categoryList.push(createdCategory);
+      },
       error => console.log(error));
   }
 
@@ -114,7 +121,7 @@ export class SongComponent implements OnInit {
       this.songService.deleteSong(id)
         .subscribe(res => {
             this.songList = this.songList.filter(song => song.id !== id);
-            console.log('obrisana pjesma');
+            console.log('Obrisana pjesma');
           },
           err => console.log(err));
     }
