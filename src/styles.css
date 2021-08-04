@@ -50,9 +50,9 @@
 }
 
 .btn-check:focus + .btn-outline-dark, .btn-outline-dark:focus,
-.btn-check:focus + .btn-warning, .btn-warning:focus {
+.btn-check:focus + .btn-owarning, .btn-warning:focus,
+.btn-check:focus + .btn-outline-warning, .btn-outline-warning:focus {
   box-shadow: none !important;
-
 }
 
 input[type] {
