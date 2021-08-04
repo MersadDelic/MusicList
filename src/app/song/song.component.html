@@ -11,8 +11,12 @@
   <button (click)="getCategories()"
           type="button" class="btn btn-secondary" style="padding-top: 10px; margin: 12px "
           data-toggle="modal"
-          data-target="#addCategory"><i class="fas fa-plus"
-                                        style="font-size: 18px; padding-right: 10px; color: #ffffff"></i>ADD NEW
+          data-target="#addCategory">
+    <i class="fas fa-plus"
+       style="font-size: 18px;
+          padding-right: 10px;
+          color: #ffffff"></i>
+    ADD NEW
     CATEGORY
   </button>
 
@@ -27,7 +31,7 @@
 
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add New Song</h5>
-        <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
+        <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal" (click)="resetSongForm()">
         </button>
       </div>
 
@@ -83,7 +87,7 @@
 
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel1">Edit Song</h5>
-        <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
+        <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal" (click)="resetSongForm()">
         </button>
       </div>
 
@@ -138,7 +142,7 @@
 
 <!-- MODAL ZA DODAVANJE KATEGORIJE -->
 <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
-     aria-hidden="true">
+     aria-hidden="true" (click)="resetCategoryForm()">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
