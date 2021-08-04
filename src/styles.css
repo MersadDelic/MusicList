@@ -38,3 +38,10 @@
   }
 }
 
+.btn-check:focus + .btn-danger, .btn-danger:focus,
+.btn-check:focus + .btn-secondary, .btn-secondary:focus,
+.btn-check:focus + .btn-outline-dark, .btn-outline-dark:focus,
+.btn-check:focus + .btn-warning, .btn-warning:focus {
+  box-shadow: none;
+}
+

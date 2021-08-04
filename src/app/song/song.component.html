@@ -4,9 +4,13 @@
   <button (click)="getCategories()"
           type="button" class="btn btn-danger" style="padding-top: 10px; margin: 12px "
           data-toggle="modal"
-          data-target="#addSong"><i class="fas fa-plus"
-                                    style="font-size: 18px; padding-right: 10px; color: #ffffff"></i>ADD NEW SONG
+          data-target="#addSong">
+    <i class="fas fa-plus"
+       style="font-size: 18px;
+       padding-right: 10px;
+       color: #ffffff;"></i>ADD NEW SONG
   </button>
+
   <!-- Button za modal ADD CATEGORY-->
   <button (click)="getCategories()"
           type="button" class="btn btn-secondary" style="padding-top: 10px; margin: 12px "
@@ -15,9 +19,7 @@
     <i class="fas fa-plus"
        style="font-size: 18px;
           padding-right: 10px;
-          color: #ffffff"></i>
-    ADD NEW
-    CATEGORY
+          color: #ffffff"></i> ADD NEW CATEGORY
   </button>
 
 </div>
@@ -67,7 +69,7 @@
         <br>
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-success" id="btn" data-dismiss="modal" (click)="saveSong()"> Save
+          <button type="button" class="btn btn-danger" id="btn" data-dismiss="modal" (click)="saveSong()"> Save
           </button>
 
           <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="resetSongForm()"> Cancel
@@ -123,7 +125,7 @@
         <br>
         <div class="modal-footer">
           <button type="button"
-                  class="btn btn-success"
+                  class="btn btn-danger"
                   id="button"
                   data-dismiss="modal"
                   (click)="updateSong()"> Update
@@ -165,7 +167,7 @@
 
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" id="prevent" data-dismiss="modal"
+            <button type="button" class="btn btn-danger" id="prevent" data-dismiss="modal"
                     (click)="saveCategory()">Add
             </button>
             <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="resetCategoryForm()">Cancel
@@ -216,7 +218,7 @@
              title="Delete Song"
              (click)="deleteSong(song.id)"></i>
           <i class="fas fa-edit"
-             style="font-size: 25px; padding: 15px; color: #185ed4"
+             style="font-size: 25px; padding: 15px; color: #6373f6"
              data-toggle="modal"
              data-target="#editSong"
              title="Edit Song"
