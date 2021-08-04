@@ -25,18 +25,16 @@ export class SongComponent implements OnInit {
   songList: Song[] = [];
   categoryList: Category[] = [];
   category: Category = new Category();
-  selectedCategory: Category;  // selektovana kategorija
+  selectedCategory: Category;
   title: any;
   artist: any;
   formGroup: FormGroup;
-  id: number | any;
-  formaGroup: FormGroup;
+  heading: string;
+  showSaveButton: boolean;
+  showUpdateButton: boolean;
 
 
   ngOnInit(): void {
-
-    // ako je selektovana kategorija vrati pjesme za tu kategoriju
-    // ako nije selektovana kategorija(prvi ulazak na stranicu), vrati sve pjesme
 
     if (this.selectedCategory) {
       this.getSongsBySelectedCategory(this.selectedCategory.id);
@@ -73,16 +71,29 @@ export class SongComponent implements OnInit {
         this.songList.push(res);
         this.resetSongForm();
       },
-      error => console.log('neuspjeh')
+      error => console.log(error)
     );
   }
 
-  onEdit(song: Song): any {
+  onEdit(song: Song): void {
+    this.editMode();
     console.log(song);
     this.songService.getSongById(song.id).subscribe(res => this.song = res);
     this.formGroup.controls.title.setValue(song.title);
     this.formGroup.controls.artist.setValue(song.artist);
     this.formGroup.controls.categoryId.setValue(song.categoryId);
+  }
+
+  addMode(): void {
+    this.showSaveButton = true;
+    this.showUpdateButton = false;
+    this.heading = 'Add new song';
+  }
+
+  editMode(): void {
+    this.showSaveButton = false;
+    this.heading = 'Edit current song';
+    this.showUpdateButton = true;
   }
 
   updateSong(): void {
@@ -122,7 +133,6 @@ export class SongComponent implements OnInit {
       this.songService.deleteSong(id)
         .subscribe(res => {
             this.songList = this.songList.filter(song => song.id !== id);
-            console.log('Obrisana pjesma');
           },
           err => console.log(err));
     }
@@ -148,7 +158,6 @@ export class SongComponent implements OnInit {
     this.selectedCategory = category;
     this.getSongsBySelectedCategory(category.id);
   }
-
 
   clearSelected(): void {
     this.ngOnInit();

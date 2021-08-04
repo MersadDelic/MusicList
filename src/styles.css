@@ -59,3 +59,11 @@ input[type] {
   box-shadow: none !important;
 }
 
+.btn-group {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 500px;
+  top: -65px;
+}
