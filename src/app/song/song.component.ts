@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Song} from '../models/song';
 import {SongService} from '../services/song.service';
 import {Category} from '../models/category';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-song',
@@ -11,15 +10,6 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./song.component.css']
 })
 export class SongComponent implements OnInit {
-
-  constructor(public songService: SongService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
-
-    this.formGroup = new FormGroup({
-      title: new FormControl(null),
-      artist: new FormControl(null),
-      categoryId: new FormControl(null)
-    });
-  }
 
   song: Song = new Song();
   songList: Song[] = [];
@@ -32,6 +22,15 @@ export class SongComponent implements OnInit {
   heading: string;
   showSaveButton: boolean;
   showUpdateButton: boolean;
+
+  constructor(public songService: SongService) {
+
+    this.formGroup = new FormGroup({
+      title: new FormControl(null, [Validators.required]),
+      artist: new FormControl(null, [Validators.required]),
+      categoryId: new FormControl(null, [Validators.required])
+    });
+  }
 
 
   ngOnInit(): void {
@@ -128,16 +127,23 @@ export class SongComponent implements OnInit {
   }
 
 
-  deleteSong(id: number): void {
+  deleteSong(id: number | any): void {
     {
       this.songService.deleteSong(id)
         .subscribe(res => {
-            this.songList = this.songList.filter(song => song.id !== id);
+            this.songList = this.songList.filter(item => item.id !== id);
           },
           err => console.log(err));
     }
   }
 
+  /* getSongById(id: number): void {
+     this.songService.getSongById(id).subscribe(song => {
+         this.song = song;
+       },
+       error => console.error(error)
+     );
+   }*/
 
   onSearchClear(): void {
     this.title = ' ';
