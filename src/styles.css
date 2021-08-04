@@ -38,10 +38,20 @@
   }
 }
 
-.btn-check:focus + .btn-danger, .btn-danger:focus,
-.btn-check:focus + .btn-secondary, .btn-secondary:focus,
+.btn-check:focus + .btn-danger, .btn-danger:focus {
+  box-shadow: none !important;
+  background-color: #dc3545;
+}
+
+
+.btn-check:focus + .btn-secondary, .btn-secondary:focus {
+  box-shadow: none !important;
+  background-color: #6c757d;
+}
+
 .btn-check:focus + .btn-outline-dark, .btn-outline-dark:focus,
 .btn-check:focus + .btn-warning, .btn-warning:focus {
-  box-shadow: none;
+  box-shadow: none !important;
+
 }
 
