@@ -11,8 +11,9 @@ import {Category} from '../models/category';
 })
 export class SongService {
 
-  private songUrl = 'https://localhost:5001/api/songs';
-  private categoryUrl = 'https://localhost:5001/api/categories';
+  // private songUrl = 'https://localhost:5001/api/songs';
+  private songUrl = 'https://musiclistapi.azurewebsites.net/api/songs';
+  private categoryUrl = 'https://musiclistapi.azurewebsites.net/api/categories';
 
 
   constructor(public http: HttpClient) {
