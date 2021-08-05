@@ -137,16 +137,8 @@ export class SongComponent implements OnInit {
     }
   }
 
-  /* getSongById(id: number): void {
-     this.songService.getSongById(id).subscribe(song => {
-         this.song = song;
-       },
-       error => console.error(error)
-     );
-   }*/
-
   onSearchClear(): void {
-    this.title = ' ';
+    this.title = '';
     this.Search();
   }
 
@@ -168,6 +160,7 @@ export class SongComponent implements OnInit {
   clearSelected(): void {
     this.ngOnInit();
     this.getAllSongs();
+    this.title = '';
   }
 
   resetCategoryForm(): void {
