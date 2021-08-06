@@ -133,7 +133,13 @@
             (click)="selectCategory(cat)">
       <h6>{{cat.name}}</h6>
     </button>
-    <button type="button" class="btn btn-warning" (click)="clearSelected()">Show All</button>
+    <button type="button" class="btn btn-warning"
+            data-toggle="popover"
+            data-delay="200"
+            data-trigger="hover"
+            data-content="Click to show all songs"
+            (click)="clearSelected()">Show All
+    </button>
   </div>
 </div>
 
@@ -152,12 +158,9 @@
           <h5 class="card-title">{{song.title}}</h5>
           <p class="card-text">{{song.artist}}</p>
         </div>
-
         <div class="btn btn_group">
           <hr/>
           <i class="fas fa-trash"
-             data-toggle="modal"
-             data-target="#confirmation"
              title="Delete Song"
              (click)="deleteSong(song.id)"></i>
           <i class="fas fa-edit"
@@ -170,5 +173,3 @@
     </div>
   </div>
 </div>
-
-
