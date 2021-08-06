@@ -121,11 +121,17 @@ export class SongComponent implements OnInit {
     this.songService.getCategories().subscribe(
       res => {
         this.categoryList = res;
+        this.getSortedCategories(this.categoryList);
       },
       error => console.log(error)
     );
   }
 
+  public getSortedCategories(category: Category[]): Category[] {
+    return category.sort((a: Category, b: Category) => {
+      return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0;
+    });
+  }
 
   deleteSong(id: number | any): void {
     {
