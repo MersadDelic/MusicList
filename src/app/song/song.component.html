@@ -1,5 +1,6 @@
 <div class="container">
 
+
   <div class="btn-group">
     <!-- Button za modal ADD SONG-->
     <button (click)="getCategories(); addMode()"
@@ -19,6 +20,14 @@
     </button>
   </div>
 </div>
+
+<!------- A L E R T ---------------------->
+<div class="bs-example" style="position: absolute; right: 20px; top: 85px; width: 350px">
+  <div *ngIf="alert" class="alert alert-success" role="alert">
+    <h5>Success</h5> {{message}}
+  </div>
+</div>
+<!------- A L E R T ---------------------->
 
 
 <!-- MODAL ZA DODAVANJE PJESME I EDITOVANJE PJESME -->
@@ -172,4 +181,6 @@
       </div>
     </div>
   </div>
+
 </div>
+

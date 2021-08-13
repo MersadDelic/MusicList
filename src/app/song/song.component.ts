@@ -22,6 +22,8 @@ export class SongComponent implements OnInit {
   heading: string;
   showSaveButton: boolean;
   showUpdateButton: boolean;
+  alert = false;
+  message: string;
 
   constructor(public songService: SongService) {
 
@@ -67,8 +69,14 @@ export class SongComponent implements OnInit {
     this.song.categoryId = this.formGroup.value.categoryId;
     this.songService.saveSong(this.song).subscribe(
       res => {
+        this.alert = true;
+        this.message = 'Successfully added new song !';
+        setTimeout(() => {                           // <<<---using ()=> syntax
+          this.alert = false;
+        }, 3000);
         this.songList.push(res);
         this.resetSongForm();
+
       },
       error => console.log(error)
     );
@@ -137,6 +145,11 @@ export class SongComponent implements OnInit {
     {
       this.songService.deleteSong(id)
         .subscribe(res => {
+            this.alert = true;
+            this.message = 'Successfully deleted song !';
+            setTimeout(() => {
+              this.alert = false;
+            }, 3000);
             this.songList = this.songList.filter(item => item.id !== id);
           },
           err => console.log(err));
@@ -176,5 +189,7 @@ export class SongComponent implements OnInit {
   resetSongForm(): void {
     this.formGroup.reset(FormControl);
   }
+
 }
+
 
