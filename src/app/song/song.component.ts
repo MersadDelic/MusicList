@@ -110,7 +110,12 @@ export class SongComponent implements OnInit {
     this.songService.updateSong(this.song.id, this.song).subscribe(
       res => {
         console.log(res);
-        window.location.reload();
+        this.getAllSongs();
+        this.alert = true;
+        this.message = 'Successfully updated song !';
+        setTimeout(() => {
+          this.alert = false;
+        }, 3000);
       },
       error => console.log(error)
     );
