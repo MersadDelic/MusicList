@@ -71,7 +71,7 @@ export class SongComponent implements OnInit {
       res => {
         this.alert = true;
         this.message = 'Successfully added new song !';
-        setTimeout(() => {                           // <<<---using ()=> syntax
+        setTimeout(() => {
           this.alert = false;
         }, 3000);
         this.songList.push(res);
@@ -120,6 +120,11 @@ export class SongComponent implements OnInit {
     this.songService.saveCategory(this.category).subscribe(
       createdCategory => {
         this.categoryList.push(createdCategory);
+        this.alert = true;
+        this.message = 'Successfully added new category !';
+        setTimeout(() => {
+          this.alert = false;
+        }, 3000);
         this.resetCategoryForm();
       },
       error => console.log(error));
