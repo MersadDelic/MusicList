@@ -52,4 +52,4 @@ jobs:
       with:
         app-name: 'musiclistapp'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_aac0227ef82249b7957bd9df91d6d36d }}
-        package: ./dist/musiclist
+        package: ./dist/MusicList
