@@ -24,7 +24,9 @@
 <!------- A L E R T ---------------------->
 <div class="bs-example" style="position: absolute; right: 20px; top: 85px; width: 350px">
   <div *ngIf="alert" class="alert alert-success" role="alert">
-    <h6>Success</h6> {{message}}
+    <h6><i class="far fa-check-circle">&nbsp;</i> Success
+      <hr/>
+    </h6> &nbsp;{{message}}
   </div>
 </div>
 <!------- A L E R T ---------------------->
@@ -166,6 +168,7 @@
         <div class="card-body">
           <h5 class="card-title">{{song.title}}</h5>
           <p class="card-text">{{song.artist}}</p>
+          <p class="card-text">{{song.createdTime}}</p>
         </div>
         <div class="btn btn_group">
           <hr/>
