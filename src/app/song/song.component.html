@@ -63,6 +63,7 @@
                   data-toggle="modal"
                   data-target="#addCategory"><b>+</b> Add Category
           </button>
+          <!-- BUTTON ZA DODAVANJE KATEGORIJE UNUTAR SONG MODALA -->
 
           <div class="form-group">
             <br>
@@ -168,22 +169,23 @@
         <div class="card-body">
           <h5 class="card-title">{{song.title}}</h5>
           <p class="card-text">{{song.artist}}</p>
-          <p class="card-text">{{song.createdTime}}</p>
+          <i>Created:<p class="card-text">{{song.createdTime | date:'dd.MM.yyyy hh:mm'}}</p></i>
         </div>
         <div class="btn btn_group">
           <hr/>
           <i class="fas fa-trash"
              title="Delete Song"
-             (click)="deleteSong(song.id)"></i>
+             (click)="deleteSong(song.id)"
+          ></i>
           <i class="fas fa-edit"
              data-toggle="modal"
              data-target="#addSong"
              title="Edit Song"
              (click)="onEdit(song)"></i>
         </div>
+
+
       </div>
     </div>
   </div>
-
 </div>
-
