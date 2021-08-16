@@ -158,14 +158,14 @@
 <!-- LISTA PJESAMA SA SEARCH BAR-om-->
 <div class="container">
 
-  <!-- OLD SONG TITLE FILTER-->
+  <!--    OLD SONG TITLE FILTER       -->
   <!--<div class="col-10" style="margin:10px auto">
     <input class="form-control" type="text" [(ngModel)]="title" name="title" placeholder="Search by song title ..."
            autocomplete="off" (ngModelChange)="Search()">
   </div>-->
   <br>
   <div class="d-flex flex-row">
-    <input [(ngModel)]="songTitleFilter" class="form-control" placeholder="Type to filter by song title..."><br>
+    <input [(ngModel)]="songTitleFilter" class="form-control" placeholder="Type to filter by song title . . ."><br>
   </div>
   <br>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
@@ -175,7 +175,7 @@
         <div class="card-body">
           <h5 class="card-title">{{song.title}}</h5>
           <p class="card-text">{{song.artist}}</p>
-          <i><p class="card-text">{{song.createdTime | date:'dd.MM.yyyy hh:mm'}}</p></i>
+          <i><p class="card-text">{{song.createdTime | date:'MMM d, y, HH:mm' }}</p></i>
         </div>
         <div class="btn btn_group">
           <hr/>
