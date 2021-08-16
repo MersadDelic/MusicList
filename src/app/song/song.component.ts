@@ -16,7 +16,6 @@ export class SongComponent implements OnInit {
   categoryList: Category[] = [];
   category: Category = new Category();
   selectedCategory: Category;
-  title: any;
   artist: any;
   formGroup: FormGroup;
   heading: string;
@@ -24,6 +23,7 @@ export class SongComponent implements OnInit {
   showUpdateButton: boolean;
   alert = false;
   message: string;
+  songTitleFilter: string = '';
 
   constructor(public songService: SongService) {
 
@@ -166,20 +166,23 @@ export class SongComponent implements OnInit {
     }
   }
 
-  onSearchClear(): void {
-    this.title = '';
-    this.Search();
-  }
-
-  Search(): void {
-    if (this.title === '') {
-      this.ngOnInit();
-    } else {
-      this.songList = this.songList.filter(res => {
-        return res.title.toLocaleLowerCase().match(this.title.toLocaleLowerCase());
-      });
+  // Filter by song title (old) ---------------------------->
+  /*  onSearchClear(): void {
+      this.title = '';
+      this.Search();
     }
-  }
+
+    Search(): void {
+      if (this.title === '') {
+        this.ngOnInit();
+      } else {
+        this.songList = this.songList.filter(res => {
+          return res.title.toLocaleLowerCase().match(this.title.toLocaleLowerCase());
+        });
+      }
+    }*/
+
+  // <---------------- Filter by song title  ------------------------->
 
   selectCategory(category: Category): void {
     this.selectedCategory = category;
@@ -189,7 +192,7 @@ export class SongComponent implements OnInit {
   clearSelected(): void {
     this.ngOnInit();
     this.getAllSongs();
-    this.title = '';
+    this.songTitleFilter = '';
   }
 
   resetCategoryForm(): void {

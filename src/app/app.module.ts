@@ -7,6 +7,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {SongFilterByTitlePipe} from './pipes/song-filter-by-title.pipe';
 
 const routes: Routes = [
   {path: '', component: SongComponent}
@@ -16,7 +17,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     SongComponent,
-    CategoryComponent
+    CategoryComponent,
+    SongFilterByTitlePipe
   ],
   imports: [
     CommonModule,
