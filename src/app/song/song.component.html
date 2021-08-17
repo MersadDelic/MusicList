@@ -1,6 +1,4 @@
 <div class="container">
-
-
   <div class="btn-group">
     <!-- Button za modal ADD SONG-->
     <button (click)="getCategories(); addMode()"
@@ -35,9 +33,8 @@
 <!-- MODAL ZA DODAVANJE PJESME I EDITOVANJE PJESME -->
 <div class="modal fade" id="addSong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel1">{{heading}}</h5>
         <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal" (click)="resetSongForm()">
@@ -68,8 +65,7 @@
           <div class="form-group">
             <br>
             <label for="categoryId">Or select category from the list below:</label>
-            <select formControlName="categoryId" class="form-control" name="categoryId" id="categoryId"
-                    required="required">
+            <select formControlName="categoryId" class="form-control" name="categoryId" id="categoryId">
               <option *ngFor="let category of categoryList" [ngValue]="category.id">{{category.name}}</option>
             </select>
           </div>
@@ -98,11 +94,11 @@
 
 
 <!-- MODAL ZA DODAVANJE KATEGORIJE -->
-<div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+<div class="modal fade bd-example-modal-xl" id="addCategory" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel2"
      aria-hidden="true" (click)="resetCategoryForm()">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-
 
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel2">Add Category</h5>
@@ -110,17 +106,12 @@
 
         </button>
       </div>
-
-
       <div class="modal-body">
         <form id="prevent1">
-
           <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title1" required [(ngModel)]="category.name" name="title">
           </div>
-
-
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" id="prevent" data-dismiss="modal"
                     (click)="saveCategory()">Add
@@ -189,8 +180,6 @@
              title="Edit Song"
              (click)="onEdit(song)"></i>
         </div>
-
-
       </div>
     </div>
   </div>
