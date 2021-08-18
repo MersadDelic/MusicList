@@ -30,7 +30,8 @@ export class SongComponent implements OnInit {
     this.formGroup = new FormGroup({
       title: new FormControl(null),
       artist: new FormControl(null),
-      categoryId: new FormControl(null)
+      categoryId: new FormControl(null),
+      url: new FormControl(null)
     });
   }
 
@@ -67,6 +68,7 @@ export class SongComponent implements OnInit {
     this.song.title = this.formGroup.value.title;
     this.song.artist = this.formGroup.value.artist;
     this.song.categoryId = this.formGroup.value.categoryId;
+    this.song.url = this.formGroup.value.url;
     this.songService.saveSong(this.song).subscribe(
       res => {
         this.alert = true;

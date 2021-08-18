@@ -101,3 +101,15 @@ input[type] {
   color: #ffffff;
   margin: 2px 15px 2px 10px;
 }
+
+.fa-play-circle {
+  font-size: 60px;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  color: #4b61ee;
+}
+
+.fa-play-circle:hover {
+  color: #ef3e3e;
+}

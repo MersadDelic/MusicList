@@ -54,6 +54,11 @@
             <input type="text" class="form-control" id="artist" formControlName="artist" name="artist" required>
           </div>
           <br>
+          <div class="form-group">
+            <label for="url">Song url</label>
+            <input type="text" class="form-control" id="url" formControlName="url" name="url" required>
+          </div>
+          <br>
 
           <!-- BUTTON ZA DODAVANJE KATEGORIJE UNUTAR SONG MODALA -->
           <button type="button" class="btn btn-secondary" style="margin-top: 20px;"
@@ -162,7 +167,8 @@
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
     <div class="col mb-4" *ngFor="let song of songList | songFilterByTitle: songTitleFilter">
       <div class="card" style="border-radius: 20px">
-        <img src="./assets/image.png" id="image" class="card-img-top" alt="...">
+        <!--<img src="./assets/image.png" id="image" class="card-img-top" alt="...">-->
+        <a href="{{song.url}}" target="_blank"><i class="fas fa-play-circle"></i></a>
         <div class="card-body">
           <h5 class="card-title">{{song.title}}</h5>
           <p class="card-text">{{song.artist}}</p>
