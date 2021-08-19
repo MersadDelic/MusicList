@@ -72,10 +72,10 @@ input[type] {
   text-align: center;
 }
 
-.fa-trash, .fa-edit {
+.fa-trash-alt, .fa-edit {
   font-size: 25px;
   padding: 15px;
-  color: #ef3e3e
+  color: #ef3e3e;
 }
 
 .fa-edit {
@@ -104,12 +104,32 @@ input[type] {
 
 .fa-play-circle {
   font-size: 60px;
-  position: absolute;
-  right: 20px;
-  top: 10px;
   color: #4b61ee;
+  position: relative;
+  padding-bottom: 5px;
+  top: 10px;
+  left: 85px;
+  margin: auto;
+  text-align: center;
+
 }
 
 .fa-play-circle:hover {
   color: #ef3e3e;
 }
+
+.btn_group {
+  margin-top: -20px;
+}
+
+.mb-4 .card {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+
+}
+
+hr {
+  padding: 0;
+  margin-top: 5px;
+}
+

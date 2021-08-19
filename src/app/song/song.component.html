@@ -166,17 +166,17 @@
   <br>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
     <div class="col mb-4" *ngFor="let song of songList | songFilterByTitle: songTitleFilter">
-      <div class="card" style="border-radius: 20px">
+      <div class="card" style="border-radius: 20px; position: relative">
         <!--<img src="./assets/image.png" id="image" class="card-img-top" alt="...">-->
-        <a href="{{song.url}}" target="_blank"><i class="fas fa-play-circle"></i></a>
+        <a href="{{song.url}}" target="_blank"><i class="fas fa-play-circle" title="Play"></i></a>
         <div class="card-body">
           <h5 class="card-title">{{song.title}}</h5>
-          <p class="card-text">{{song.artist}}</p>
-          <i><p class="card-text">{{song.createdTime | date:'MMM d, y, HH:mm' }}</p></i>
+          <p class="card-text" style="font-size: 15px; padding-bottom: 5px ">{{song.artist}}</p>
+          <i><p class="card-text" style="color: #606060">{{song.createdTime | date:'MMM d, y, HH:mm' }}</p></i>
         </div>
         <div class="btn btn_group">
           <hr/>
-          <i class="fas fa-trash"
+          <i class="fas fa-trash-alt"
              title="Delete Song"
              (click)="deleteSong(song.id)"
           ></i>
