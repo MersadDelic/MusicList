@@ -27,21 +27,14 @@ export class SongComponent implements OnInit {
   constructor(public songService: SongService) {
 
     this.formGroup = new FormGroup({
-      title: new FormControl(null, [Validators.required]),
-      artist: new FormControl('', [Validators.required]),
+      title: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
+      artist: new FormControl('', [Validators.required, Validators.minLength(2)]),
       categoryId: new FormControl('', [Validators.required]),
       url: new FormControl('', [Validators.required])
     });
   }
-  // V A L I D A T I O N    F O R M  //
-  get title(): any {
-    return this.formGroup.get('title');
-  }
 
-  get artist(): any {
-    return this.formGroup.get('artist');
-  }
-
+  // VALIDATION FORM FOR URL & CATEGORYiD //
   get url(): any {
     return this.formGroup.get('url');
   }

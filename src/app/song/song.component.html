@@ -47,13 +47,22 @@
             <label for="title">Song title</label>
             <input type="text" class="form-control" id="title" formControlName="title" name="title">
           </div>
-          <span class="error" *ngIf="title.invalid && title.touched"> Title is required</span>
+          <span class="error"
+                *ngIf="formGroup.controls['title'].errors && (formGroup.controls['title'].touched || formGroup.controls['title'].dirty)">
+          <span class="error" *ngIf="formGroup.controls['title'].errors.required"> Title is required</span>
+          <span class="error"
+                *ngIf="formGroup.controls['title'].errors?.minlength || formGroup.controls['title'].errors?.maxlength"> The title must contain between 2 and 30 characters.</span>
+          </span>
+
           <br><br>
           <div class="form-group">
             <label for="artist">Song artist</label>
             <input type="text" class="form-control" id="artist" formControlName="artist" name="artist">
           </div>
-          <span class="error" *ngIf="artist.invalid && artist.touched"> Artist is required</span>
+          <span class="error"
+                *ngIf="formGroup.controls['artist'].errors && (formGroup.controls['artist'].touched || formGroup.controls['artist'].dirty)">
+            <span class="error" *ngIf="formGroup.controls['artist'].errors.required"> Artist is required</span>
+          <span class="error" *ngIf="formGroup.controls['artist'].errors?.minlength"> The artist must contain minimum 2 characters.</span></span>
           <br><br>
           <div class="form-group">
             <label for="url">Song url</label>
