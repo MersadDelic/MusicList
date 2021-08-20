@@ -29,7 +29,6 @@
 </div>
 <!------- A L E R T ---------------------->
 
-
 <!-- MODAL ZA DODAVANJE PJESME I EDITOVANJE PJESME -->
 <div class="modal fade" id="addSong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -43,22 +42,25 @@
 
 
       <div class="modal-body">
-        <form [formGroup]="formGroup">
+        <form [formGroup]="formGroup" novalidate>
           <div class="form-group">
             <label for="title">Song title</label>
-            <input type="text" class="form-control" id="title" formControlName="title" name="title" required>
+            <input type="text" class="form-control" id="title" formControlName="title" name="title">
           </div>
-          <br>
+          <span class="error" *ngIf="title.invalid && title.touched"> Title is required</span>
+          <br><br>
           <div class="form-group">
             <label for="artist">Song artist</label>
-            <input type="text" class="form-control" id="artist" formControlName="artist" name="artist" required>
+            <input type="text" class="form-control" id="artist" formControlName="artist" name="artist">
           </div>
-          <br>
+          <span class="error" *ngIf="artist.invalid && artist.touched"> Artist is required</span>
+          <br><br>
           <div class="form-group">
             <label for="url">Song url</label>
-            <input type="text" class="form-control" id="url" formControlName="url" name="url" required>
+            <input type="text" class="form-control" id="url" formControlName="url" name="url">
           </div>
-          <br>
+          <span class="error" *ngIf="url.invalid && url.touched"> Url is required</span>
+          <br><br>
 
           <!-- BUTTON ZA DODAVANJE KATEGORIJE UNUTAR SONG MODALA -->
           <button type="button" class="btn btn-secondary" style="margin-top: 20px;"
@@ -74,25 +76,30 @@
               <option *ngFor="let category of categoryList" [ngValue]="category.id">{{category.name}}</option>
             </select>
           </div>
+          <span class="error" *ngIf="categoryId.invalid && categoryId.touched"> Category is required</span>
+          <br><br>
 
+
+          <br>
+          <div class="modal-footer">
+
+            <button type="submit" class="btn btn-danger" id="btn" [disabled]="formGroup.invalid" data-dismiss="modal"
+                    (click)="saveSong();"
+                    *ngIf="showSaveButton"> Save
+            </button>
+
+            <button type="button" class="btn btn-danger" id="button" data-dismiss="modal" [disabled]="formGroup.invalid"
+                    (click)="updateSong()"
+                    *ngIf="showUpdateButton"> Update
+            </button>
+
+            <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="resetSongForm()"> Cancel
+            </button>
+
+          </div>
         </form>
-
-        <br>
-        <div class="modal-footer">
-
-          <button type="button" class="btn btn-danger" id="btn" data-dismiss="modal" (click)="saveSong()"
-                  *ngIf="showSaveButton"> Save
-          </button>
-
-          <button type="button" class="btn btn-danger" id="button" data-dismiss="modal" (click)="updateSong()"
-                  *ngIf="showUpdateButton"> Update
-          </button>
-
-          <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="resetSongForm()"> Cancel
-          </button>
-
-        </div>
       </div>
+
     </div>
   </div>
 </div>

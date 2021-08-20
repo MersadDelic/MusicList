@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Song} from '../models/song';
 import {SongService} from '../services/song.service';
 import {Category} from '../models/category';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-song',
@@ -16,25 +16,39 @@ export class SongComponent implements OnInit {
   categoryList: Category[] = [];
   category: Category = new Category();
   selectedCategory: Category;
-  artist: any;
   formGroup: FormGroup;
   heading: string;
   showSaveButton: boolean;
   showUpdateButton: boolean;
   alert = false;
   message: string;
-  songTitleFilter: string = '';
+  songTitleFilter = '';
 
   constructor(public songService: SongService) {
 
     this.formGroup = new FormGroup({
-      title: new FormControl(null),
-      artist: new FormControl(null),
-      categoryId: new FormControl(null),
-      url: new FormControl(null)
+      title: new FormControl(null, [Validators.required]),
+      artist: new FormControl('', [Validators.required]),
+      categoryId: new FormControl('', [Validators.required]),
+      url: new FormControl('', [Validators.required])
     });
   }
 
+  get title(): any {
+    return this.formGroup.get('title');
+  }
+
+  get artist(): any {
+    return this.formGroup.get('artist');
+  }
+
+  get url(): any {
+    return this.formGroup.get('url');
+  }
+
+  get categoryId(): any {
+    return this.formGroup.get('categoryId');
+  }
 
   ngOnInit(): void {
 
@@ -90,6 +104,7 @@ export class SongComponent implements OnInit {
     this.songService.getSongById(song.id).subscribe(res => this.song = res);
     this.formGroup.controls.title.setValue(song.title);
     this.formGroup.controls.artist.setValue(song.artist);
+    this.formGroup.controls.url.setValue(song.url);
     this.formGroup.controls.categoryId.setValue(song.categoryId);
   }
 
@@ -204,6 +219,32 @@ export class SongComponent implements OnInit {
   resetSongForm(): void {
     this.formGroup.reset(FormControl);
   }
+
+  /*validate(): boolean {
+
+  if (this.formGroup.value.title === '') {
+    document.getElementById('invalid').innerHTML = 'Ukucaj title';
+    this.formGroup.value.title.focus();
+    return false;
+  }
+ /!* if( document.myForm.EMail.value == "" ) {
+    alert( "Please provide your Email!" );
+    document.myForm.EMail.focus() ;
+    return false;
+  }
+  if( document.myForm.Zip.value == "" || isNaN( document.myForm.Zip.value ) ||
+    document.myForm.Zip.value.length != 5 ) {
+
+    alert( "Please provide a zip in the format #####." );
+    document.myForm.Zip.focus() ;
+    return false;
+  }
+  if( document.myForm.Country.value == "-1" ) {
+    alert( "Please provide your country!" );
+    return false;
+  }*!/
+  return true;
+}*/
 
 }
 
