@@ -29,7 +29,7 @@
 </div>
 <!------- A L E R T ---------------------->
 
-<!-- MODAL ZA DODAVANJE PJESME I EDITOVANJE PJESME -->
+<!-- MODAL | ADD & EDIT SONG -->
 <div class="modal fade" id="addSong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -40,29 +40,32 @@
         </button>
       </div>
 
-
       <div class="modal-body">
-        <form [formGroup]="formGroup" novalidate>
+        <form [formGroup]="SongFormGroup">
           <div class="form-group">
             <label for="title">Song title</label>
             <input type="text" class="form-control" id="title" formControlName="title" name="title">
-          </div>
-          <span class="error"
-                *ngIf="formGroup.controls['title'].errors && (formGroup.controls['title'].touched || formGroup.controls['title'].dirty)">
-          <span class="error" *ngIf="formGroup.controls['title'].errors.required"> Title is required</span>
-          <span class="error"
-                *ngIf="formGroup.controls['title'].errors?.minlength || formGroup.controls['title'].errors?.maxlength"> The title must contain between 2 and 30 characters.</span>
+            <span class="text-danger"
+                  *ngIf="SongFormGroup.controls['title'].errors && SongFormGroup.controls['title'].touched">
+            <span class="text-danger" *ngIf="SongFormGroup.controls['title'].errors.required">Title is required</span>
+            <span class="text-danger"
+                  *ngIf="SongFormGroup.controls['title'].errors?.minlength || SongFormGroup.controls['title'].errors?.maxlength">
+                The title must contain between 2 and 30 characters.</span>
           </span>
+            <br><br>
+          </div>
 
-          <br><br>
           <div class="form-group">
             <label for="artist">Song artist</label>
-            <input type="text" class="form-control" id="artist" formControlName="artist" name="artist">
+            <input type="text" class="form-control" id="artist" formControlName="artist" name="artist"
+                   required="required">
           </div>
-          <span class="error"
-                *ngIf="formGroup.controls['artist'].errors && (formGroup.controls['artist'].touched || formGroup.controls['artist'].dirty)">
-            <span class="error" *ngIf="formGroup.controls['artist'].errors.required"> Artist is required</span>
-          <span class="error" *ngIf="formGroup.controls['artist'].errors?.minlength"> The artist must contain minimum 2 characters.</span></span>
+          <!-------  1st WAY OF VALIDATION  -------->
+          <span class="text-danger"
+                *ngIf="SongFormGroup.controls['artist'].errors && SongFormGroup.controls['artist'].touched">
+            <span class="text-danger"
+                  *ngIf="SongFormGroup.controls['artist'].errors.required"> Artist is required</span>
+          <span class="text-danger" *ngIf="SongFormGroup.controls['artist'].errors?.minlength"> The artist must contain minimum 2 characters.</span></span>
           <br><br>
           <div class="form-group">
             <label for="url">Song url</label>
@@ -85,19 +88,17 @@
               <option *ngFor="let category of categoryList" [ngValue]="category.id">{{category.name}}</option>
             </select>
           </div>
-          <span class="error" *ngIf="categoryId.invalid && categoryId.touched"> Category is required</span>
+          <span class="text-danger" *ngIf="categoryId.invalid && categoryId.touched"> Category is required</span>
           <br><br>
-
-
           <br>
-          <div class="modal-footer">
 
-            <button type="submit" class="btn btn-danger" id="btn" [disabled]="formGroup.invalid" data-dismiss="modal"
-                    (click)="saveSong();"
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger" [disabled]="SongFormGroup.invalid" data-dismiss="modal"
+                    (click)="saveSong()"
                     *ngIf="showSaveButton"> Save
             </button>
 
-            <button type="button" class="btn btn-danger" id="button" data-dismiss="modal" [disabled]="formGroup.invalid"
+            <button type="submit" class="btn btn-danger" data-dismiss="modal" [disabled]="SongFormGroup.invalid"
                     (click)="updateSong()"
                     *ngIf="showUpdateButton"> Update
             </button>
@@ -114,32 +115,38 @@
 </div>
 
 
-<!-- MODAL ZA DODAVANJE KATEGORIJE -->
-<div class="modal fade bd-example-modal-xl" id="addCategory" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalLabel2"
-     aria-hidden="true" (click)="resetCategoryForm()">
+<!-- MODAL | ADD CATEGORY -->
+<div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel2">Add Category</h5>
-        <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal">
-
+        <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal" (click)="resetCategoryForm()">
         </button>
       </div>
+
       <div class="modal-body">
-        <form id="prevent1">
+        <form [formGroup]="CategoryFormGroup">
           <div class="form-group">
-            <label for="title">Name</label>
-            <input type="text" class="form-control" id="name" required [(ngModel)]="category.name" name="name">
+            <label for="title">Category name</label>
+            <input type="text" class="form-control" formControlName="name" name="name" id="name">
+            <span class="text-danger"
+                  *ngIf="CategoryFormGroup.controls['name'].errors && CategoryFormGroup.controls['name'].touched">
+              <span class="text-danger" *ngIf="CategoryFormGroup.controls['name'].errors.required">Please enter category name</span>
+              <span class="text-danger" *ngIf="CategoryFormGroup.controls['name'].errors?.minlength">The name must contain minimum 2 characters</span>
+            </span>
+            <br><br>
           </div>
+
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="prevent" data-dismiss="modal"
+            <button type="submit" class="btn btn-danger" data-dismiss="modal" [disabled]="CategoryFormGroup.invalid"
                     (click)="saveCategory()">Add
             </button>
             <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="resetCategoryForm()">Cancel
             </button>
           </div>
+
         </form>
       </div>
     </div>
@@ -147,7 +154,7 @@
 </div>
 
 
-<!-- PRIKAZ KATEGORIJA -->
+<!-- CATEGORY LIST -->
 <div class="row justify-content-center">
   <div class='col-auto'>
     <div class="title"><h5>Select category</h5></div>
@@ -167,7 +174,7 @@
   </div>
 </div>
 
-<!-- LISTA PJESAMA SA SEARCH BAR-om-->
+<!-- SONG LIST WITH SEARCH BAR-->
 <div class="container">
 
   <!--    OLD SONG TITLE FILTER       -->
@@ -206,3 +213,12 @@
     </div>
   </div>
 </div>
+
+<!------ Example of validation ------------>
+<!--
+
+<input type="text" required="required" class="form-control" #name="ngModel" [class.is-invalid]="name.invalid && name.touched"
+       [(ngModel)]="category.name" name="name" id="name">
+<div *ngIf="name.errors && (name.invalid || name.touched)">
+  <span class="error" *ngIf="name.invalid"> Name is required</span><br>
+</div>-->

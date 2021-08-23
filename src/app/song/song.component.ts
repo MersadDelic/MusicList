@@ -16,7 +16,8 @@ export class SongComponent implements OnInit {
   categoryList: Category[] = [];
   category: Category = new Category();
   selectedCategory: Category;
-  formGroup: FormGroup;
+  SongFormGroup: FormGroup;
+  CategoryFormGroup: FormGroup;
   heading: string;
   showSaveButton: boolean;
   showUpdateButton: boolean;
@@ -25,22 +26,24 @@ export class SongComponent implements OnInit {
   songTitleFilter = '';
 
   constructor(public songService: SongService) {
-
-    this.formGroup = new FormGroup({
+    this.SongFormGroup = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
       artist: new FormControl('', [Validators.required, Validators.minLength(2)]),
       categoryId: new FormControl('', [Validators.required]),
       url: new FormControl('', [Validators.required])
     });
+
+    this.CategoryFormGroup = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(2)])
+    });
   }
 
   // VALIDATION FORM FOR URL & CATEGORYiD //
   get url(): any {
-    return this.formGroup.get('url');
+    return this.SongFormGroup.get('url');
   }
-
   get categoryId(): any {
-    return this.formGroup.get('categoryId');
+    return this.SongFormGroup.get('categoryId');
   }
 
   ngOnInit(): void {
@@ -72,10 +75,10 @@ export class SongComponent implements OnInit {
   }
 
   saveSong(): void {
-    this.song.title = this.formGroup.value.title;
-    this.song.artist = this.formGroup.value.artist;
-    this.song.categoryId = this.formGroup.value.categoryId;
-    this.song.url = this.formGroup.value.url;
+    this.song.title = this.SongFormGroup.value.title;
+    this.song.artist = this.SongFormGroup.value.artist;
+    this.song.categoryId = this.SongFormGroup.value.categoryId;
+    this.song.url = this.SongFormGroup.value.url;
     this.songService.saveSong(this.song).subscribe(
       res => {
         this.alert = true;
@@ -95,10 +98,10 @@ export class SongComponent implements OnInit {
     this.editMode();
     console.log(song);
     this.songService.getSongById(song.id).subscribe(res => this.song = res);
-    this.formGroup.controls.title.setValue(song.title);
-    this.formGroup.controls.artist.setValue(song.artist);
-    this.formGroup.controls.url.setValue(song.url);
-    this.formGroup.controls.categoryId.setValue(song.categoryId);
+    this.SongFormGroup.controls.title.setValue(song.title);
+    this.SongFormGroup.controls.artist.setValue(song.artist);
+    this.SongFormGroup.controls.url.setValue(song.url);
+    this.SongFormGroup.controls.categoryId.setValue(song.categoryId);
   }
 
   addMode(): void {
@@ -114,9 +117,9 @@ export class SongComponent implements OnInit {
   }
 
   updateSong(): void {
-    this.song.title = this.formGroup.value.title;
-    this.song.artist = this.formGroup.value.artist;
-    this.song.categoryId = this.formGroup.value.categoryId;
+    this.song.title = this.SongFormGroup.value.title;
+    this.song.artist = this.SongFormGroup.value.artist;
+    this.song.categoryId = this.SongFormGroup.value.categoryId;
     this.songService.updateSong(this.song.id, this.song).subscribe(
       res => {
         console.log(res);
@@ -132,6 +135,7 @@ export class SongComponent implements OnInit {
   }
 
   saveCategory(): void {
+    this.category.name = this.CategoryFormGroup.value.name;
     this.songService.saveCategory(this.category).subscribe(
       createdCategory => {
         this.categoryList.push(createdCategory);
@@ -191,7 +195,6 @@ export class SongComponent implements OnInit {
         });
       }
     }*/
-
   // <---------------- Filter by song title  ------------------------->
 
   selectCategory(category: Category): void {
@@ -206,11 +209,11 @@ export class SongComponent implements OnInit {
   }
 
   resetCategoryForm(): void {
-    this.category.name = '';
+    this.CategoryFormGroup.reset();
   }
 
   resetSongForm(): void {
-    this.formGroup.reset(FormControl);
+    this.SongFormGroup.reset();
   }
 
   /*validate(): boolean {
