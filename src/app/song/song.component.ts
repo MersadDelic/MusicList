@@ -38,10 +38,11 @@ export class SongComponent implements OnInit {
     });
   }
 
-  // VALIDATION FORM FOR URL & CATEGORYiD //
+  // Specific way of VALIDATION FORM FOR URL & CATEGORYiD //
   get url(): any {
     return this.SongFormGroup.get('url');
   }
+
   get categoryId(): any {
     return this.SongFormGroup.get('categoryId');
   }
@@ -195,7 +196,8 @@ export class SongComponent implements OnInit {
         });
       }
     }*/
-  // <---------------- Filter by song title  ------------------------->
+
+  // <---------------- Filter by song title(old)  ------------------------->
 
   selectCategory(category: Category): void {
     this.selectedCategory = category;
@@ -215,33 +217,6 @@ export class SongComponent implements OnInit {
   resetSongForm(): void {
     this.SongFormGroup.reset();
   }
-
-  /*validate(): boolean {
-
-  if (this.formGroup.value.title === '') {
-    document.getElementById('invalid').innerHTML = 'Ukucaj title';
-    this.formGroup.value.title.focus();
-    return false;
-  }
- /!* if( document.myForm.EMail.value == "" ) {
-    alert( "Please provide your Email!" );
-    document.myForm.EMail.focus() ;
-    return false;
-  }
-  if( document.myForm.Zip.value == "" || isNaN( document.myForm.Zip.value ) ||
-    document.myForm.Zip.value.length != 5 ) {
-
-    alert( "Please provide a zip in the format #####." );
-    document.myForm.Zip.focus() ;
-    return false;
-  }
-  if( document.myForm.Country.value == "-1" ) {
-    alert( "Please provide your country!" );
-    return false;
-  }*!/
-  return true;
-}*/
-
 }
 
 

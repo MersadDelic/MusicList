@@ -50,6 +50,7 @@ export class SongService {
         catchError((err) => throwError(err))
       );
   }
+
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.categoryUrl)
       .pipe(
