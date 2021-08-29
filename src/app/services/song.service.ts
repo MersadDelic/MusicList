@@ -19,6 +19,18 @@ export class SongService {
   constructor(public http: HttpClient) {
   }
 
+
+  /*   HARD CODED LIST
+  catList: Category[] = [
+     {id: 1, name: 'Folk'},
+     {id: 2, name: 'Sevdah'},
+     {id: 3, name: 'Rock'}
+   ];
+
+   getCatList(): Category[] {
+     return this.catList;
+   }*/
+
   getSongList(): Observable<Song[]> {
     return this.http.get<Song[]>(this.songUrl)
       .pipe(
