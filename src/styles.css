@@ -72,16 +72,25 @@ input[type] {
   text-align: center;
 }
 
-.fa-trash-alt, .fa-edit {
+.fa-trash-alt {
   font-size: 25px;
-  padding: 15px;
+  padding: 8px;
   color: #ef3e3e;
+  float: left;
+}
+
+.fa-heart {
+  color: #ef3e3e;
+  font-size: 25px;
+  padding: 8px;
+  float: right;
 }
 
 .fa-edit {
   font-size: 25px;
-  padding: 15px;
-  color: #7b4ff5
+  padding: 8px;
+  color: #7b4ff5;
+  float: left;
 
 }
 

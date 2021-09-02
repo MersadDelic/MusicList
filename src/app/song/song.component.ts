@@ -24,6 +24,9 @@ export class SongComponent implements OnInit {
   alert = false;
   message: string;
   songTitleFilter = '';
+  selectedSong = false;
+  color = '';
+
 
   constructor(public songService: SongService) {
     this.SongFormGroup = new FormGroup({
@@ -56,6 +59,14 @@ export class SongComponent implements OnInit {
     }
     this.getCategories();
   }
+
+  addToFavourite(): void {
+    this.selectedSong = true;
+    this.color = '#ef3e3e';
+    console.log(this.selectedSong);
+
+  }
+
 
   getSongsBySelectedCategory(categoryId: number | any): void {
     this.songService.getSongsByCategory(categoryId)
